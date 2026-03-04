@@ -147,7 +147,7 @@
         },
         {
           question:
-            "Untuk yang belum ga perjadin, otomatis ga dapet form, jadi belum ngisi norek, NPWP, dll?",
+            "Untuk yang ga perjadin, otomatis ga dapet form, jadi belum ngisi norek, NPWP, dll?",
           answer:
             "Untuk sekarang tidak, karena data ini berkaitan dengan pengurusan tiket berangkat saja, bukan untuk gaji, pengisian data itu akan difollow up lagi nanti.",
         },
@@ -332,9 +332,14 @@
       function searchFAQ(keyword) {
         return new Promise((resolve) => {
           setTimeout(() => {
-            const filtered = faqData.filter((item) =>
-              item.question.toLowerCase().includes(keyword.toLowerCase()),
+            const lowerKeyword = keyword.toLowerCase();
+
+            const filtered = faqData.filter(
+              (item) =>
+                item.question.toLowerCase().includes(lowerKeyword) ||
+                item.answer.toLowerCase().includes(lowerKeyword),
             );
+
             resolve(filtered);
           }, 300); // simulasi delay server
         });
